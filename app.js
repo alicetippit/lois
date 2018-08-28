@@ -5,12 +5,12 @@
 /findMap?library_code=MAIN&location_code=nstx&location_name=Stacks&call_number=805+S759
 /findMap?library_code=MAIN&location_code=nstx&location_name=Stacks&call_number=813.5+A549w
 /findMap?library_code=MAIN&location_code=nstx&location_name=Stacks&call_number=823.8+G24Zs
-/findMap?library_code=MAIN&location_code=narch,lg&location_name=Art+Library&call_number=N7432.5.A78+087+2018
+/findMap?library_code=MAIN&location_code=narchlg&location_name=Art+Library&call_number=N7432.5.A78+087+2018
 /findMap?library_code=MAIN&location_code=nart&location_name=Art+Library&call_number=720.952+F996r
 /findMap?library_code=MAIN&location_code=mlc&location_name=Music+Listening+Center&call_number=CD31729
 /findMap?library_code=MAIN&location_code=ngov&location_name=Government+Info&call_number=abunchofnumbers
 /findMap?library_code=MAIN&location_code=naarch&location_name=University+Archives&call_number=Archives
-/findMap?library_code=MAIN&location_code=tran&location_name=Chinese+Collection&call_number=some+number
+/findMap?library_code=MAIN&location_code=tran&location_name=Transportation&call_number=some+number
 /findMap?library_code=MAIN&location_code=mstx&location_name=Music+Library+Stacks&call_number=ML73.5+.K53
 /findMap?library_code=MAIN&location_code=mstx&location_name=Music+Library+Stacks&call_number=M512.4.S38+D.667
 /findMap?library_code=MAIN&location_code=mcoll&location_name=Music+Library+Stacks&call_number=M3+.B111+v.46
@@ -53,7 +53,7 @@ app.use((req, res, next) => {
 // Passport config
 passport.use("saml", new samlStrategy({
     path: "/login/callback",
-    entryPoint: "http://www.alicetippit.com",
+    entryPoint: "https://www.northwestern.edu/",
     issuer: "passport-saml",
     cert:""
 }, 
