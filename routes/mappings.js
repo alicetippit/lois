@@ -17,7 +17,7 @@ router.get("/mappings/:id", (req, res) => {
     var static_info_id = req.params.id;
     db.query("SELECT static_info.id AS static_info_id, locations.name AS location_name, loc_info, svgs.name AS svg_name, svgs.id AS svg_id, x_coord, y_coord, maps.name AS map_name, maps.id AS map_id, image FROM static_info JOIN locations ON locations.id = static_info.location_id JOIN maps ON maps.id = static_info.map_id JOIN svgs ON svgs.id = static_info.svg_id WHERE ? = static_info.id;", static_info_id, (err, result, fields) => {
         if(err) throw err;
-        var location_name = (result[0].loc_name),
+        var location_name = (result[0].location_name),
             map_name = (result[0].map_name),
             map_id = (result[0].map_id),
             loc_map = (result[0].image),
@@ -27,6 +27,26 @@ router.get("/mappings/:id", (req, res) => {
             y_coord = (result[0].y_coord),
             loc_info = (result[0].loc_info);
         res.render("static-mapping", {static_info_id: static_info_id, location_name: location_name, map_name: map_name, map_id: map_id, loc_map: loc_map, svg_name: svg_name, svg_id: svg_id, x_coord: x_coord, y_coord: y_coord, loc_info: loc_info});
+    });
+});
+
+// Get dynamic section mapping
+
+router.get("/mappings/locations/sections", (req, res) => {
+   db.query("SELECT svgs.name AS svg_name, svgs.id as svg_id, dynamic_info.location_id FROM svgs JOIN dynamic_info ON svgs.id=dynamic_info.svg_id GROUP BY svgs.id;", (err, result, fields) => {
+       if(err) throw err;
+       res.render("sections", {mappings: result});
+   });
+});
+
+// Get section call number ranges
+
+router.get("/mappings/locations/ranges/:id", (req,res) => {
+    var svg_id = req.params.id;
+    db.query("SELECT svgs.name AS svg_name, svgs.id AS svg_id, dynamic_info.id AS dynamic_mapping_id, start_range, end_range, shelf_range, shelf_range_side, loc_info FROM svgs JOIN dynamic_info ON svgs.id=dynamic_info.svg_id WHERE svg_id = ?", svg_id, (err, result, fields) => {
+        if(err) throw err;
+        var svg_name = [result[0].svg_name];
+        res.render("ranges", {mappings: result, svg_name: svg_name});
     });
 });
 
@@ -78,7 +98,7 @@ router.put("/mappings/:id/map", (req,res) => {
 
 // Update SVG 
 
-router.put("/mappings/:id/highlight/:svg_id", (req, res) => {
+router.put("/mappings/locations/:id", (req, res) => {
     var svg_id = req.params.svg_id,
         svg_name = req.body.svg_name,
         x_coord = (req.body.x_coord),
@@ -87,6 +107,21 @@ router.put("/mappings/:id/highlight/:svg_id", (req, res) => {
     db.query("UPDATE svgs SET name = ?, x_coord = ?, y_coord = ? WHERE id = ?;", [svg_name, x_coord, y_coord, svg_id], (err, result) => {
         if(err) throw err;
         req.flash("success", "The location highlight has been updated.");
+        res.redirect(redirect_url);
+    });
+});
+
+// Update dynamic_info table call number start and end range
+
+router.put("/mappings/locations/ranges/:id/:dynamic_mapping_id", (req, res) => {
+    var svg_id = req.params.id,
+        dynamic_mapping_id = req.params.dynamic_mapping_id,
+        start_range = req.body.start_range,
+        end_range = req.body.end_range,
+        redirect_url = "/mappings/locations/ranges/" + svg_id;
+    db.query("Update dynamic_info SET start_range = ?, end_range = ? WHERE id = ?", [start_range, end_range, dynamic_mapping_id], (err, result, fields) => {
+        if(err) throw err; 
+        req.flash("success", "The shelf range has been updated.");
         res.redirect(redirect_url);
     });
 });

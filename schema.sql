@@ -15,7 +15,7 @@ CREATE TABLE maps(
     last_updated TIMESTAMP DEFAULT NOW() ON UPDATE CURRENT_TIMESTAMP
 );
 
-CREATE TABLE static_info(
+CREATE TABLE static_mappings(
     id INT AUTO_INCREMENT PRIMARY KEY,
     loc_info VARCHAR(255),
     shelf_range INT,
@@ -30,7 +30,7 @@ CREATE TABLE static_info(
     ON DELETE CASCADE
 );
 
-CREATE TABLE dynamic_info(
+CREATE TABLE dynamic_mappings(
     id INT AUTO_INCREMENT PRIMARY KEY,
     start_range VARCHAR(255) NOT NULL,
     end_range VARCHAR(255) NOT NULL,
