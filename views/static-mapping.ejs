@@ -29,7 +29,7 @@
         <div class="row">
             <div class="col">
                 <h4>Edit Map:</h4>
-                <form action="/mappings/<%= static_info_id %>/map?_method=PUT" method="POST">
+                <form action="/mappings/<%= static_mapping_id %>/map?_method=PUT" method="POST">
                     <div class="form-group">
                         <select class="form-control" name="map">
                             <option value="6">Lower Level</option>
@@ -47,7 +47,7 @@
         <div class="row">
             <div class="col">
                 <h4>Edit Highlight:</h4>
-                <form action="/mappings/<%= static_info_id %>/highlight/<%= svg_id %>?_method=PUT" method="POST">
+                <form action="/mappings/<%= static_mapping_id %>/highlight/<%= svg_id %>?_method=PUT" method="POST">
                     <div class="form-group">
                         <label for"svg_name">Name:</label>
                         <input class="form-control" type="text" name="svg_name" id="svg_name" value="<%= svg_name %>" required>

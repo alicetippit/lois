@@ -6,7 +6,7 @@ router.get("/findMap", (req, res) => {
     var location_code = (req.query.location_code),
         call_number = (req.query.call_number);
     if(location_code == "nstx,lg" || location_code == "mstx" || location_code == "nstx"){
-        db.query("SELECT maps.name AS map_name, image, x_coord, y_coord, library, locations.name AS loc_name, loc_info, message, shelf_range, shelf_range_side FROM maps JOIN dynamic_info ON maps.id = dynamic_info.map_id JOIN locations ON locations.id = dynamic_info.location_id JOIN svgs ON svgs.id = dynamic_info.svg_id WHERE ? BETWEEN start_range AND end_range;", call_number, (err, foundMap, fields) => {
+        db.query("SELECT maps.name AS map_name, image, x_coord, y_coord, library, locations.name AS loc_name, loc_info, message, shelf_range, shelf_range_side FROM maps JOIN dynamic_mapping ON maps.id = dynamic_mapping.map_id JOIN locations ON locations.id = dynamic_mapping.location_id JOIN svgs ON svgs.id = dynamic_mapping.svg_id WHERE ? BETWEEN start_range AND end_range;", call_number, (err, foundMap, fields) => {
             if(err){
                 console.log(err.sqlMessage);
             }
@@ -30,7 +30,7 @@ router.get("/findMap", (req, res) => {
         });
     } else {
     //use location code to display map
-        db.query("SELECT maps.name AS map_name, image, x_coord, y_coord, library, locations.name AS loc_name, loc_info, message, shelf_range, code FROM maps JOIN static_info ON maps.id = static_info.map_id JOIN locations ON locations.id = static_info.location_id JOIN svgs ON svgs.id = static_info.svg_id WHERE ? = code;", location_code, (err, foundMap, fields) => {
+        db.query("SELECT maps.name AS map_name, image, x_coord, y_coord, library, locations.name AS loc_name, loc_info, message, shelf_range, code FROM maps JOIN static_mapping ON maps.id = static_mapping.map_id JOIN locations ON locations.id = static_mapping.location_id JOIN svgs ON svgs.id = static_mapping.svg_id WHERE ? = code;", location_code, (err, foundMap, fields) => {
             if(err) throw err;
             if(foundMap.length === 0){
                 req.flash("error", "Location map not found.");

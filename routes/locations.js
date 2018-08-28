@@ -16,27 +16,12 @@ router.get("/locations", (req, res) => {
 router.get("/locations/:location_id/:location_code", (req, res) => {
     var location_id = req.params.location_id,
         location_code = req.params.location_code;
-    //Check location code. If location is dynamic, route to that page instead of static location page
-    // if(location_code == "nstxlg" || location_code == "mstx" || location_code == "nstx"){
-    //     db.query("SELECT dynamic_info.id AS dynamic_info_id, svgs.name AS svg_name, library, locations.name AS location_name, loc_info, message, shelf_range, shelf_range_side, start_range, end_range FROM locations JOIN dynamic_info ON locations.id = dynamic_info.location_id JOIN svgs ON svgs.id = dynamic_info.svg_id WHERE ? = locations.id", location_id, (err, result, fields) => {
-    //         if(err) throw err;
-    //         var location_name = (result[0].location_name),
-    //             message = (result[0].message),
-    //             library = (result[0].library),
-    //             dynamic_info_id = (result[0].dynamic_info_id),
-    //             svg_name = (result[0].svg_name),
-    //             loc_info = (result[0].loc_info),
-    //             shelf_range = (result[0].shelf_range),
-    //             shelf_range_side = (result[0].shelf_range_side);
-    //         res.render("dynamic-location", {location: result, location_code: location_code, location_name: location_name, location_id: location_id, message: message, library: library, dynamic_info_id: dynamic_info_id, svg_name: svg_name, loc_info: loc_info, shelf_range: shelf_range, shelf_range_side: shelf_range_side});
-    //     });
-    // } else {
         db.query("SELECT library, locations.name AS location_name, message FROM locations WHERE ? = locations.id", location_id, (err, result, fields) => {
             if(err) throw err;
             var location_name = (result[0].location_name),
                 message = (result[0].message),
                 library = (result[0].library);
-            res.render("static-location", {location: result, location_code: location_code, location_name: location_name, location_id: location_id, message: message, library: library});
+            res.render("edit-location", {location: result, location_code: location_code, location_name: location_name, location_id: location_id, message: message, library: library});
         });
     
 });
