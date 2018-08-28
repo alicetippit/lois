@@ -1,0 +1,26 @@
+<% include partials/header-admin %>
+
+<content>
+    <div class="container content">
+        <div class="row">
+            <div class="col">
+                <h4>Edit Sections:</h4>
+                <br/>
+                <% mappings.forEach(function(mapping){ %>
+                    <div class="clearfix">
+                        <div class="card">
+                            <div class="card-body">
+                                <h5><%= mapping.svg_name %></h5>
+                                    <form action="/mappings/locations/ranges/<%= mapping.svg_id %>">
+                                        <button class="btn btn-outline-warning btn-sm float-right" type="submit">Edit</button>
+                                    </form>
+                            </div>
+                        </div>
+                    </div>    
+                <% }); %>
+            </div>
+        </div>
+    </div>
+</content>
+
+<% include partials/footer %>

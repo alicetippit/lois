@@ -1,0 +1,45 @@
+<% include partials/header-pub %>
+
+<content>
+    <div class="container content">
+        <div class="row">
+            <div class="col">
+                <h4 class="uppercase">Call number: <%= call_number %></h4>
+                <p><%= library %> Library <%= map_name %></p>
+                <p><%= loc_name %>: <%= loc_info %></p>
+                <% if(shelf_range) { %> 
+                <p>Shelf Range: <%= shelf_range %></p>
+                <p>Side: <%= shelf_range_side %></p>
+                <% } %>
+                <% if(message) { %>
+                <p><%= message %></p>
+                <% } %>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-8">
+                <div class="img-overlay-wrap">
+                    <img class="img-fluid mx-auto" src="/images/<%= loc_map %>">
+                    <% if(loc_map == "LibraryMap_Level4.png" || loc_map == "LibraryMap_Level5.png" || loc_map == "LibraryMap_LowerLevel.png") { %>
+                        <svg version="1.1" baseProfile="full" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+                        xmlns:ev="http://www.w3.org/2001/xml-events">
+                            <circle cx="<%= x_coord %>" cy="<%= y_coord %>" r="10" stroke="none" fill="blueviolet" fill-opacity=".3"/>
+                            <circle cx="<%= x_coord %>" cy="<%= y_coord %>" r="7" stroke="blueviolet" fill="none" stroke-opacity=".5" stroke-width="2"/>
+                            <circle cx="<%= x_coord %>" cy="<%= y_coord %>" r="3" stroke="none" fill="blueviolet" fill-opacity=".5"/>
+                        </svg>
+                    <% } else { %>
+                        <svg version="1.1" baseProfile="full" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+                        xmlns:ev="http://www.w3.org/2001/xml-events">
+                            <circle cx="<%= x_coord %>" cy="<%= y_coord %>" r="6" stroke="none" fill="blueviolet" fill-opacity=".3"/>
+                            <circle cx="<%= x_coord %>" cy="<%= y_coord %>" r="4" stroke="blueviolet" fill="none" stroke-opacity=".5"/>
+                            <circle cx="<%= x_coord %>" cy="<%= y_coord %>" r="2" stroke="none" fill="blueviolet" fill-opacity=".5"/>
+                        </svg>
+                    <% } %>
+                </div>
+            </div>
+            <% include partials/key %>
+        </div>
+    </div>
+</content>
+
+<% include partials/footer %>

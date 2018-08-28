@@ -1,0 +1,25 @@
+<% include partials/header-admin %>
+
+<content>
+    <div class="container content">
+        <div class="row">
+            <div class="col">
+                <% mappings.forEach(function(mapping){ %>
+                    <div class="card">
+                        <div class="card-body">
+                        <h4><%= mapping.location_name %></h4>
+                            <ul>
+                                <li>Location Information: <%= mapping.loc_info %></li>
+                                <li>Map: <%= mapping.map_name %></li>
+                                <li>Map Highlight: <%= mapping.svg_name %></li>
+                            </ul>
+                            <a class="btn btn-outline-warning btn-sm float-right" href="/mappings/<%= mapping.static_info_id %>">Edit</a>
+                        </div>
+                    </div>
+                <% }); %>
+            </div>
+        </div>
+    </div>
+</content>
+
+<% include partials/footer %>

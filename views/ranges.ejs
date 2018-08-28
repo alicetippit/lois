@@ -1,0 +1,31 @@
+<% include partials/header-admin %>
+
+<content>
+    <div class="container content">
+        <div class="row">
+            <div class="col">
+                <h4><%= svg_name %>:</h4>                
+                <% mappings.forEach(function(mapping) { %>
+                    <div class="clearfix">
+                        <div class="card">
+                            <div class="card-body">
+                                <h5>Shelf Range <%= mapping.shelf_range %>, Side <%= mapping.shelf_range_side %></h5>
+                                <form action="/mappings/locations/ranges/<%= mapping.svg_id %>/<%= mapping.dynamic_mapping_id %>?_method=PUT" method=POST>
+                                    <div class="form-group">
+                                        <label for="start range">Start Range:</label>
+                                        <input class="form-control" type="text" id="start range" name="start_range" value="<%= mapping.start_range%>">
+                                        <label for="end range">End Range:</label>
+                                        <input class="form-control" type="text" id="end range" name="end_range" value="<%= mapping.end_range%>">
+                                    </div>
+                                    <button class="btn btn-outline-success btn-sm float-right" type="submit">Submit</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                <% }); %>
+            </div>
+        </div>    
+    </div>
+</content
+
+<% include partials/footer %>

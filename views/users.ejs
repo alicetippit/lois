@@ -1,0 +1,28 @@
+<% include partials/header-admin %>
+
+<content>
+    <div class="container content">
+        <div class="row">
+            <div class="col">
+                <% users.forEach(function(user){ %>
+                    <div class="card">
+                        <div class="card-body">
+                        <h4><%= user.first_name %> <%= user.last_name %></h4>
+                            <ul>
+                                <li>NetID: <%= user.net_id %></li>
+                                <li>Role: <%= user.role %></li>
+                                <li>Email: <%= user.email %></li>
+                            </ul>
+                            <form action="/users/<%= user.id %>?_method=DELETE" method="POST">
+                                <input type="submit" class="btn btn-outline-danger btn-sm float-right" value="Delete">
+                            </form>
+                        </div>
+                    </div>
+                <% }); %>
+            </div>
+        </div>
+    </div>
+</content>
+
+
+<% include partials/footer %>

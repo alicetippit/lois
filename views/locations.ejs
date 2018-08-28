@@ -1,0 +1,24 @@
+<% include partials/header-admin %>
+
+<content>
+    <div class="container content">
+        <div class="row">
+            <div class="col">
+                <% locations.forEach(function(location){ %>
+                    <div class="card">
+                        <div class="card-body">
+                        <h4><%= location.name %></h4>
+                            <ul>
+                                <li>Library: <%= location.library %></li>
+                                <li>Location message: <%= location.message %></li>
+                            </ul>
+                            <a class="btn btn-outline-warning btn-sm float-right" href="/locations/<%= location.id %>/<%= location.code %>">Edit</a>
+                        </div>
+                    </div>
+                <% }); %>
+            </div>
+        </div>
+    </div>
+</content>
+
+<% include partials/footer %>

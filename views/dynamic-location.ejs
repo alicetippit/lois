@@ -1,0 +1,53 @@
+<% include partials/header-admin %>
+
+<content>
+    <div class="container content">
+        <div class="row">
+            <div class="col">
+                <h4>Edit Location Name:</h4>
+                <form action="/locations/<%= location_id %>/<%= location_code %>/name?_method=PUT" method=POST>
+                    <div class="form-group">
+                        <label for="location_name">Name:</label>
+                        <input class="form-control" type="text" name="loc_name" id="location_name" value="<%= location_name %>">
+                    </div>
+                    <button class="btn btn-outline-success btn-sm float-right" type="submit">Submit</button>
+                </form>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <h4>Edit Message:</h4>
+                <form action="/locations/<%= location_id %>/<%= location_code %>/message?_method=PUT" method=POST>
+                    <div class="form-group">
+                        <label for="location_message">Message:</label>
+                        <input class="form-control" type="text" id="location_message" name="location_message" value="<%= message %>">                       
+                    </div>
+                    <button class="btn btn-outline-success btn-sm float-right" type="submit">Submit</button>
+                </form>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <h4>Edit Shelf Ranges:</h4>
+                <br/>
+                <% location.forEach(function(location){ %>
+                    <div class="clearfix">
+                        <p><%= location.loc_info %></p>
+                        <p>Shelf Range <%= location.shelf_range %>, Side <%= location.shelf_range_side %></p>
+                        <form action="/locations/<%= location_id %>/<%= location_code %>/<%= location.dynamic_info_id %>?_method=PUT" method=POST>
+                            <div class="form-group">
+                                <label for="start range">Start Range:</label>
+                                <input class="form-control" type="text" id="start range" name="start_range" value="<%= location.start_range%>">
+                                <label for="end range">End Range:</label>
+                                <input class="form-control" type="text" id="end range" name="end_range" value="<%= location.end_range%>">
+                            </div>
+                            <button class="btn btn-outline-success btn-sm float-right" type="submit">Submit</button>
+                        </form>
+                    </div>
+                <% }) %>
+            </div>
+        </div>
+    </div>
+</content>
+
+<% include partials/footer %>

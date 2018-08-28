@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>Northwestern Libraries Locate Service</title>
+	<meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
+	<link rel="stylesheet" type="text/css" href="/stylesheets/app.css">
+</head>
+<body>
+	<header>
+		<div class="top-bar container-fluid">
+			<div class="container">
+				<div class="row">
+					<div class="logo col-3">
+						<img alt="Northwestern University" src="https://common.northwestern.edu/v8/css/images/northwestern.svg">
+					</div>
+					<div class="links col-9">
+						<ul class="float-right">
+							<li>Locations
+							    <ul>
+							        <li><a href="/locations/new">Create Location</a></li>
+							        <li><a href="/locations">View and Edit Locations</a></li>
+							    </ul>
+							</li>
+							<li>Mappings
+							    <ul>
+							        <li><a href="/mappings">View and Edit Mappings</a></li>
+							    </ul>
+							</li>
+							<li>Users
+							    <ul>
+							        <li><a href="users/new">Create User</a></li>
+							        <li><a href="/users">View All Users</a></li>
+							    </ul>
+							</li>
+							<li>User Name</a></li>
+							
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="bottom-bar container-fluid">
+			<div class="department container">
+				<div class="row">
+					<div class="col">
+						<h2>
+							<a href="">LOIS</a>
+						</h2>
+					</div>
+				</div>
+			</div>
+		</div>
+	</header>
+	<div class="container">
+	    <% if(error && error.length > 0){ %>
+	        <div class="alert alert-danger" role="alert">
+	            <%= error %>
+	        </div>
+	    <% } %>
+	    <% if(success && success.length > 0){ %>
+	        <div class="alert alert-success" role="alert">
+	            <%= success %>
+	        </div>
+	    <% } %>
+	</div>
